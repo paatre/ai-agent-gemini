@@ -37,3 +37,22 @@ GEMINI_API_KEY=your_api_key_here
 
 The `.env` file will be loaded automatically by the `python-dotenv` package.
 The `.env` file is included in `.gitignore`.
+
+## Usage
+
+You can run the agent with:
+
+```bash
+uv run main.py <content>
+```
+
+Replace `<content>` with the content you want the agent to process. For example:
+
+```bash
+uv run main.py "How many r's are there in strawberry?"
+```
+
+The agent will respond with the answer to the query and also prints how many
+prompt and response tokens were used.
+
+The agent exits if you don't give content.
