@@ -1,7 +1,8 @@
 # AI Agent with Gemini (Boot.dev)
 
-This is a simple AI Agent project that utilizes Google's Gemini model's
-free tier to perform various tasks. This project follows the course on Boot.dev
+This is a simple AI Agent project that utilizes Google's `gemini-2.0-flash-001` model to perform various tasks. The model has a generous free tier with free-of-charge input and output tokens and a rate limit of 200 requests per day. Read more about the pricing and the rate limits [here](https://ai.google.dev/gemini-api/docs/pricing) and [here](https://ai.google.dev/gemini-api/docs/rate-limits).
+
+This project follows the course on Boot.dev
 platform: https://www.boot.dev/courses/build-ai-agent-python.
 
 The project is built using Python and
