@@ -1,9 +1,6 @@
-# AI Agent with Gemini (Boot.dev)
+# AI Agent with Gemini 2.0 Flash
 
 This is a simple AI Agent project that utilizes Google's `gemini-2.0-flash-001` model to perform various tasks. The model has a generous free tier with free-of-charge input and output tokens and a rate limit of 200 requests per day. Read more about the pricing and the rate limits [here](https://ai.google.dev/gemini-api/docs/pricing) and [here](https://ai.google.dev/gemini-api/docs/rate-limits).
-
-This project follows the course on Boot.dev
-platform: https://www.boot.dev/courses/build-ai-agent-python.
 
 The project is built using Python and
 [Google's Gen AI SDK](https://googleapis.github.io/python-genai/).
@@ -13,13 +10,13 @@ The project is built using Python and
 First, clone the repository:
 
 ```bash
-git clone https://github.com/paatre/ai-agent-gemini-bootdev.git
+git clone https://github.com/paatre/ai-agent-gemini.git
 ```
 
 After that navigate to the project directory and install the dependencies:
 
 ```bash
-cd ai-agent-gemini-bootdev
+cd ai-agent-gemini
 uv venv
 source .venv/bin/activate # On Windows use `.\venv\Scripts\activate`
 uv sync
