@@ -52,7 +52,13 @@ Replace `<content>` with the content you want the agent to process. For example:
 uv run main.py "How many r's are there in strawberry?"
 ```
 
-The agent will respond with the answer to the query and also prints how many
-prompt and response tokens were used.
+The agent will then respond with an answer to the query.
+
+If you use a `--verbose` flag, the result will also contain the prompt message
+and how many prompt (input) and response (output) tokens were used.
+
+```bash
+uv run main.py "How many r's are there in strawberry?" --verbose
+```
 
 The agent exits if you don't give content.
