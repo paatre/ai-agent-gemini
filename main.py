@@ -3,6 +3,13 @@ import sys
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from prompts import system_prompt
+from functions.schemas import (
+    schema_get_file_content,
+    schema_get_files_info,
+    schema_run_python_file,
+    schema_write_file
+)
 
 
 def main():
@@ -26,12 +33,28 @@ def main():
         )
     ]
 
-    response = client.models.generate_content(
-        model="gemini-2.0-flash-001",
-        contents=messages
+    available_functions = types.Tool(
+        function_declarations=[
+            schema_get_file_content,
+            schema_get_files_info,
+            schema_run_python_file,
+            schema_write_file
+        ]
     )
 
-    print(response.text)
+    response = client.models.generate_content(
+        model="gemini-2.0-flash-001",
+        contents=messages,
+        config=types.GenerateContentConfig(
+            tools=[available_functions],
+            system_instruction=system_prompt)
+    )
+
+    if response.function_calls:
+        for function_call_part in response.function_calls:
+            print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+    else:
+        print(response.text)
 
     if is_verbose:
         print(f"User prompt: {user_prompt}")
