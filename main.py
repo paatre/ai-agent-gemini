@@ -1,5 +1,5 @@
+import argparse
 import os
-import sys
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
@@ -15,22 +15,34 @@ from functions.schemas import (
 
 def main():
     load_dotenv()
-    api_key = os.environ.get("GEMINI_API_KEY")
-    client = genai.Client(api_key=api_key)
 
-    if len(sys.argv) < 2:
-        sys.exit("No content was given for the Gemini client. Exiting.")
+    parser = argparse.ArgumentParser(
+        description="AI Agent poweredy by Gemini 2.0 Flash"
+    )
 
-    is_verbose = False
-    if len(sys.argv) > 2 and sys.argv[2] == "--verbose":
-        is_verbose = True
+    parser.add_argument(
+        "prompt",
+        type=str,
+        help="The prompt to send to the AI agent."
+    )
 
-    user_prompt = sys.argv[1]
+    parser.add_argument(
+        "-v", "--verbose",
+        action="store_true",
+        help="Enable verbose output."
+    )
+
+    args = parser.parse_args()
+    user_prompt = args.prompt
+    is_verbose = args.verbose
+
+    if is_verbose:
+        print(f"User prompt: {user_prompt}\n")
 
     messages = [
         types.Content(
             role="user",
-            parts=[types.Part(text=user_prompt )]
+            parts=[types.Part(text=user_prompt)]
         )
     ]
 
@@ -42,6 +54,9 @@ def main():
             schema_write_file
         ]
     )
+
+    api_key = os.environ.get("GEMINI_API_KEY")
+    client = genai.Client(api_key=api_key)
 
     response = client.models.generate_content(
         model="gemini-2.0-flash-001",
@@ -69,7 +84,6 @@ def main():
         print(response.text)
 
     if is_verbose:
-        print(f"User prompt: {user_prompt}")
         if response.usage_metadata:
             print(f"Prompt tokens: {response.usage_metadata.prompt_token_count}")
             print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
