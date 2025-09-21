@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 from prompts import system_prompt
+from functions.call_function import call_function
 from functions.schemas import (
     schema_get_file_content,
     schema_get_files_info,
@@ -52,7 +53,18 @@ def main():
 
     if response.function_calls:
         for function_call_part in response.function_calls:
-            print(f"Calling function: {function_call_part.name}({function_call_part.args})")
+            content = call_function(function_call_part, verbose=is_verbose)
+
+            if (
+                (parts := content.parts) and
+                (function_response := parts[0].function_response) and
+                (result := function_response.response)
+            ):
+                if not result:
+                    raise Exception("Function call did not return any result.")
+
+                if is_verbose:
+                    print(f"-> {result["result"]}")
     else:
         print(response.text)
 
