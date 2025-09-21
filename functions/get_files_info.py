@@ -24,7 +24,7 @@ def get_files_info(working_directory, directory="."):
             file_info = f"- {entry}: file_size={file_size} bytes, is_dir={is_dir}"
             file_infos.append(file_info)
 
-        return "\n".join(entries)
+        return "\n".join(file_infos)
 
     except Exception as e:
         return f"Error: {e}\n"
