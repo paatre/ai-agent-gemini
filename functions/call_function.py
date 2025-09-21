@@ -23,7 +23,7 @@ def call_function(function_call_part, verbose=False):
 
     if not function_name in valid_functions:
         return types.Content(
-            role="tool",
+            role="user",
             parts=[
                 types.Part.from_function_response(
                     name=function_name,
@@ -38,7 +38,7 @@ def call_function(function_call_part, verbose=False):
     function_result = function(working_directory, **args)
 
     return types.Content(
-        role="tool",
+        role="user",
         parts=[
             types.Part.from_function_response(
                 name=function_name,
