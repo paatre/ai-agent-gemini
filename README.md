@@ -1,6 +1,19 @@
 # AI Agent with Gemini 2.0 Flash
 
-This is a simple AI Agent project that utilizes Google's `gemini-2.0-flash-001` model to perform various tasks. The model has a generous free tier with free-of-charge input and output tokens and a rate limit of 200 requests per day. Read more about the pricing and the rate limits [here](https://ai.google.dev/gemini-api/docs/pricing) and [here](https://ai.google.dev/gemini-api/docs/rate-limits).
+This is a simple AI Agent project that utilizes Google's `gemini-2.0-flash-001`.
+The agent is capable of making function calls to interact with the file system
+and run Python scripts. This allows the model to perform a variety of tasks
+beyond simple text generation, such as:
+
+- Listing files and directories
+- Reading file contents
+- Executing Python files with optional arguments
+- Writing or overwriting files
+
+The model has a generous free tier with free-of-charge input and output tokens
+and a rate limit of 200 requests per day. Read more about the pricing and the
+rate limits [here](https://ai.google.dev/gemini-api/docs/pricing) and
+[here](https://ai.google.dev/gemini-api/docs/rate-limits).
 
 The project is built using Python and
 [Google's Gen AI SDK](https://googleapis.github.io/python-genai/).
@@ -49,16 +62,16 @@ uv run main.py <content>
 Replace `<content>` with the content you want the agent to process. For example:
 
 ```bash
-uv run main.py "How many r's are there in strawberry?"
+uv run main.py "Read the content of prompts.py"
 ```
 
 The agent will then respond with an answer to the query.
 
-If you use a `--verbose` flag, the result will also contain the prompt message
-and how many prompt (input) and response (output) tokens were used.
+If you use a `--verbose` flag, the AI agent outputs your prompt and the result
+will also contain information about function calls and token usage:
 
 ```bash
-uv run main.py "How many r's are there in strawberry?" --verbose
+uv run main.py "Read the content of prompts.py" --verbose
 ```
 
-The agent exits if you don't give content.
+The agent isn't interactive, it exits if you don't give content.
