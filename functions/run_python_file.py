@@ -22,7 +22,7 @@ def run_python_file(working_directory, file_path, args=[]):
             timeout=30,
             capture_output=True,
             cwd=abs_work_dir,
-            text=True
+            text=True,
         )
 
         stdout = completed_process.stdout.strip()
@@ -47,4 +47,3 @@ def run_python_file(working_directory, file_path, args=[]):
 
     except Exception as e:
         return f"Error: executing Python file: {e}"
-

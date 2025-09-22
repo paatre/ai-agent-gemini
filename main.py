@@ -10,7 +10,7 @@ from functions.schemas import (
     schema_get_file_content,
     schema_get_files_info,
     schema_run_python_file,
-    schema_write_file
+    schema_write_file,
 )
 
 
@@ -21,16 +21,10 @@ def main():
         description="AI Agent poweredy by Gemini 2.0 Flash"
     )
 
-    parser.add_argument(
-        "prompt",
-        type=str,
-        help="The prompt to send to the AI agent."
-    )
+    parser.add_argument("prompt", type=str, help="The prompt to send to the AI agent.")
 
     parser.add_argument(
-        "-v", "--verbose",
-        action="store_true",
-        help="Enable verbose output."
+        "-v", "--verbose", action="store_true", help="Enable verbose output."
     )
 
     args = parser.parse_args()
@@ -40,19 +34,14 @@ def main():
     if is_verbose:
         print(f"User prompt: {user_prompt}\n")
 
-    messages = [
-        types.Content(
-            role="user",
-            parts=[types.Part(text=user_prompt)]
-        )
-    ]
+    messages = [types.Content(role="user", parts=[types.Part(text=user_prompt)])]
 
     available_functions = types.Tool(
         function_declarations=[
             schema_get_file_content,
             schema_get_files_info,
             schema_run_python_file,
-            schema_write_file
+            schema_write_file,
         ]
     )
 
@@ -66,8 +55,8 @@ def main():
                 model="gemini-2.0-flash-001",
                 contents=messages,
                 config=types.GenerateContentConfig(
-                    tools=[available_functions],
-                    system_instruction=system_prompt)
+                    tools=[available_functions], system_instruction=system_prompt
+                ),
             )
 
             # Candidates provide reasoning and context for the model for the

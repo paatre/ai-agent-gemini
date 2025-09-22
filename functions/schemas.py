@@ -43,9 +43,7 @@ schema_run_python_file = types.FunctionDeclaration(
             ),
             "args": types.Schema(
                 type=types.Type.ARRAY,
-                items=types.Schema(
-                    type=types.Type.STRING
-                ),
+                items=types.Schema(type=types.Type.STRING),
                 description="Extra arguments for the executable Python file in a list format. Defaults to an empty list if no extra arguments are given.",
             ),
         },
