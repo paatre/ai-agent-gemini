@@ -8,10 +8,10 @@ def get_files_info(working_directory, directory="."):
         abs_dir_full_path = os.path.abspath(dir_full_path)
 
         if not abs_dir_full_path.startswith(abs_work_dir):
-            return f"Error: Cannot list \"{directory}\" as it is outside the permitted working directory\n"
+            return f'Error: Cannot list "{directory}" as it is outside the permitted working directory\n'
 
         if not os.path.isdir(dir_full_path):
-            return f"Error: \"{directory}\" is not a directory\n"
+            return f'Error: "{directory}" is not a directory\n'
 
         entries = os.listdir(dir_full_path)
 
