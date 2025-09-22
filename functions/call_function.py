@@ -21,7 +21,7 @@ def call_function(function_call_part, verbose=False):
 
     function_name = function_call_part.name
 
-    if not function_name in valid_functions:
+    if function_name not in valid_functions:
         return types.Content(
             role="user",
             parts=[
